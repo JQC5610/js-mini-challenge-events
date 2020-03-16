@@ -2,6 +2,7 @@
 
 const playerContainer = document.querySelector(".player-container")
 
+
 // render one player to the DOM
 function renderPlayer(player) {
   // create an element for the outer div
@@ -32,6 +33,8 @@ PLAYERS.forEach(renderPlayer)
 
 
 /***** Deliverable 1 *****/
+const header = document.getElementById("header")
+
 function toggleColor(element) {
   if (element.style.color === "red") {
     element.style.color = "black"
@@ -40,7 +43,34 @@ function toggleColor(element) {
   }
 }
 
+header.addEventListener('click', function(event){toggleColor(event.target)})
+
+
+
 
 /***** Deliverable 2 *****/
+const form = document.querySelector("#new-player-form")
+form.addEventListener('submit', function(event){
+  event.preventDefault()
+  let player = {
+    number: event.target.number.value,
+    name: event.target.name.value,
+    nickanme: event.target.nickname.value,
+    photo: event.target.photo.value,
+    likes: 1000
+  }
+  renderPlayer(player)
+  form.reset()
+
+})
+
+
 
 /***** Deliverable 3 *****/
+
+playerContainer.addEventListener('click', function(event){
+  if (event.target.className === 'like-button'){
+    let playerLikes = event.target.parentNode.querySelector('.likes')
+    playerLikes.innerText = `${(parseInt(playerLikes.innerText) + 1)} likes`
+  }
+})
